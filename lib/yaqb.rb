@@ -5,4 +5,14 @@ require 'yaqb/configuration'
 require 'yaqb/railtie'
 
 module Yaqb
+  class << self
+    def configure
+      yield(configuration)
+    end
+
+    def configuration
+      @configuration ||= Configuration.new
+    end
+    alias config configuration
+  end
 end

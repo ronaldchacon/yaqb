@@ -1,17 +1,6 @@
 # frozen_string_literal: true
 
 module Yaqb
-  class << self
-    def configure
-      yield(configuration)
-    end
-
-    def configuration
-      @configuration ||= Configuration.new
-    end
-    alias config configuration
-  end
-
   class Configuration
     def paginator
       @paginator || set_paginator
