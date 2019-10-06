@@ -2,6 +2,7 @@
 
 require 'yaqb/version'
 require 'yaqb/configuration'
+require 'yaqb/errors/query_builder_error'
 require 'yaqb/railtie'
 
 module Yaqb

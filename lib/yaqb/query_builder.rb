@@ -7,7 +7,7 @@ module Yaqb
     private
 
     def orchestrate(scope)
-      Yaqb::QueryBuilders::QueryOrchestrator.new(scope, params, request, response).call
+      QueryBuilders::QueryOrchestrator.new(scope, params, request, response).call
     end
   end
 end
