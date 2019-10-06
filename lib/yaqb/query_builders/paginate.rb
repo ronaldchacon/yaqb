@@ -53,7 +53,7 @@ module Yaqb
         return default unless @query_params[name]
 
         unless @query_params[name] =~ /\A\d+\z/
-          raise Yaqb::QueryBuilderError.new("#{name}=#{@query_params[name]}"),
+          raise Errors::QueryBuilderError.new("#{name}=#{@query_params[name]}"),
           'Invalid Pagination params. Only numbers are supported for "page" and "per"'
         end
 
