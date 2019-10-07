@@ -3,12 +3,18 @@
 module Yaqb
   module QueryBuilders
     class Sort
-      def initialize(scope, query_params)
+      DIRECTIONS = %w[asc desc].freeze
+
+      def initialize(scope, params)
         @scope = scope
-        @query_params = query_params
+        @column = params[:sort]
+        @direction = params[:dir]
       end
 
       def sort
+        return @scope unless @column && @direction
+
+        @scope.order(Arel.sql("#{@column} #{@direction}"))
       end
     end
   end
