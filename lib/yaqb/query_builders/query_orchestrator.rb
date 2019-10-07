@@ -15,7 +15,9 @@ module Yaqb
       end
 
       def call
+        @scope = sort
         @scope = paginate
+
         @scope
       end
 
@@ -26,6 +28,10 @@ module Yaqb
         paginator = Paginate.new(@scope, @request.query_parameters, current_url)
         @response.headers['Link'] = paginator.links
         paginator.paginate
+      end
+
+      def sort
+        Sort.new(@scope, @params).sort
       end
     end
   end
