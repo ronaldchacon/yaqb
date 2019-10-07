@@ -1,5 +1,12 @@
 module Yaqb
   module Errors
-    class QueryBuilderError < StandardError; end
+    class QueryBuilderError < StandardError
+      attr_accessor :invalid_params
+
+      def initialize(invalid_params)
+        @invalid_params = invalid_params
+        super
+      end
+    end
   end
 end
