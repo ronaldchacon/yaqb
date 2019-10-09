@@ -18,6 +18,7 @@ module Yaqb
       def call
         @scope = sort
         @scope = paginate
+        @scope = filter
 
         @scope
       end
@@ -36,7 +37,7 @@ module Yaqb
       end
 
       def filter
-        Filter.new(@scope, @params.to_unsafe_hash, options).filter
+        Filter.new(@scope, @params.to_unsafe_hash, @options).filter
       end
     end
   end

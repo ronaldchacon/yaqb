@@ -77,9 +77,9 @@ module Yaqb
 
       def error!(key, data)
         columns = @options[:columns].join(', ')
-        pred = PREDICATES.join(',')
+        pred = PREDICATES.join(', ')
 
-        raise QueryBuilderError.new("q[#{key}]=#{data[:value]}"),
+        raise Errors::QueryBuilderError.new("q[#{key}]=#{data[:value]}"),
               "Invalid Filter params. Allowed columns: (#{columns}), 'predicates': #{pred}"
       end
     end
