@@ -6,8 +6,8 @@ module Yaqb
   module QueryBuilder
     private
 
-    def orchestrate(scope)
-      QueryBuilders::QueryOrchestrator.new(scope, params, request, response).call
+    def orchestrate(scope, options = {})
+      QueryBuilders::QueryOrchestrator.new(scope, params, request, response, options).call
     end
 
     def builder_error(error)
