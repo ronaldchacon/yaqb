@@ -6,6 +6,6 @@ unless defined?(Kaminari)
   Kernel.warn <<~HEREDOC
     Warning: Yaqb relies on Kaminari. Please
     install dependency by adding the following to your Gemfile:
-    gem 'kaminari'
+    gem 'kaminari'\n
   HEREDOC
 end
