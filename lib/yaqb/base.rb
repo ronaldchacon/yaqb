@@ -11,6 +11,8 @@ module Yaqb
       end
     end
 
+    module ClassMethods; end
+
     private
 
     def orchestrate(scope, presenter)
