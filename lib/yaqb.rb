@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 require 'yaqb/version'
+require 'yaqb/hooks'
 require 'yaqb/configuration'
 require 'yaqb/errors/query_builder_error'
-require 'yaqb/railtie'
 
 module Yaqb
   class << self
