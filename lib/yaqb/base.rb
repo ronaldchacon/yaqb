@@ -3,7 +3,7 @@
 require 'yaqb/query_builders/query_orchestrator'
 
 module Yaqb
-  module QueryBuilder
+  module Base
     private
 
     def orchestrate(scope, options = {})
