@@ -5,10 +5,10 @@ module Yaqb
     class Filter
       PREDICATES = %w[eq cont notcont start end gt lt].freeze
 
-      def initialize(scope, params, options = {})
+      def initialize(scope, params, presenter)
         @scope = scope
         @filters = params['q'] || {}
-        @options = options
+        @presenter = presenter
       end
 
       def filter
@@ -68,7 +68,8 @@ module Yaqb
       end
 
       def validate_filters
-        attributes = @options[:columns]
+        attributes = @presenter.filter_attributes
+
         @filters.each do |key, data|
           error!(key, data) unless attributes.include?(data[:column])
           error!(key, data) unless PREDICATES.include?(data[:predicate])
@@ -76,7 +77,7 @@ module Yaqb
       end
 
       def error!(key, data)
-        columns = @options[:columns].join(', ')
+        columns = @presenter.filter_attributes.join(', ')
         pred = PREDICATES.join(', ')
 
         raise Errors::QueryBuilderError.new("q[#{key}]=#{data[:value]}"),

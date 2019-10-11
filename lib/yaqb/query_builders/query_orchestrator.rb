@@ -7,12 +7,12 @@ require 'yaqb/query_builders/filter'
 module Yaqb
   module QueryBuilders
     class QueryOrchestrator
-      def initialize(scope, params, request, response, options = {})
+      def initialize(scope, params, request, response, presenter)
         @scope = scope
         @params = params
         @request = request
         @response = response
-        @options = options
+        @presenter = presenter
       end
 
       def call
@@ -37,7 +37,7 @@ module Yaqb
       end
 
       def filter
-        Filter.new(@scope, @params.to_unsafe_hash, @options).filter
+        Filter.new(@scope, @params.to_unsafe_hash, @presenter).filter
       end
     end
   end
