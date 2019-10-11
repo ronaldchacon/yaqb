@@ -6,17 +6,8 @@ module Yaqb
   module Base
     private
 
-    def orchestrate(scope, options = {})
-      QueryBuilders::QueryOrchestrator.new(scope, params, request, response, options).call
-    end
-
-    def builder_error(error)
-      render status: 400, json: {
-        error: {
-          message: error.message,
-          invalid_params: error.invalid_params
-        }
-      }
+    def orchestrate(scope, presenter)
+      QueryBuilders::QueryOrchestrator.new(scope, params, request, response, presenter).call
     end
   end
 end
