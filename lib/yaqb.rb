@@ -3,6 +3,8 @@
 require 'yaqb/version'
 require 'yaqb/hooks'
 require 'yaqb/configuration'
+require 'yaqb/presenter'
+require 'yaqb/base'
 require 'yaqb/errors/query_builder_error'
 
 module Yaqb
