@@ -33,7 +33,7 @@ module Yaqb
       end
 
       def sort
-        Sort.new(@scope, @params).sort
+        Sort.new(@scope, @params, @presenter).sort
       end
 
       def filter
