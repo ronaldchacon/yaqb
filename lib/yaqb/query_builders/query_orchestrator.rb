@@ -7,6 +7,8 @@ require 'yaqb/query_builders/filter'
 module Yaqb
   module QueryBuilders
     class QueryOrchestrator
+      attr_reader :scope, :links
+
       def initialize(scope, params, request, response, presenter)
         @scope = scope
         @params = params
@@ -16,11 +18,11 @@ module Yaqb
       end
 
       def call
+        @scope = filter
         @scope = sort
         @scope = paginate
-        @scope = filter
 
-        @scope
+        self
       end
 
       private
@@ -28,7 +30,7 @@ module Yaqb
       def paginate
         current_url = @request.base_url + @request.path
         paginator = Paginate.new(@scope, @request.query_parameters, current_url)
-        @response.headers['Link'] = paginator.links
+        @response.headers['Link'] = @links = paginator.links
         paginator.paginate
       end
 
