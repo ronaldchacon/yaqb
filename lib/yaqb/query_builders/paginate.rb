@@ -16,10 +16,10 @@ module Yaqb
       end
 
       def links
-        @links ||= pages.each_with_object([]) do |(k, v), links|
-          query_params = @query_params.merge("page" => v, "per" => @per).to_param
-          links << "<#{@url}?#{query_params}>; rel=\"#{k}\""
-        end.join(', ')
+        @links ||= pages.each_with_object({}) do |(k, v), hash|
+          query_params = @query_params.merge('page' => v, 'per' => @per).to_param
+          hash[k] = "#{@url}?#{query_params}"
+        end
       end
 
       private
