@@ -1,21 +1,11 @@
 # frozen_string_literal: true
 
-require 'yaqb/version'
+module Yaqb; end
+
+begin; require 'rails'; rescue LoadError; end
+
 require 'yaqb/hooks'
-require 'yaqb/configuration'
+require 'yaqb/config'
+require 'yaqb/errors/query_builder_error'
 require 'yaqb/presenter'
 require 'yaqb/base'
-require 'yaqb/errors/query_builder_error'
-
-module Yaqb
-  class << self
-    def configure
-      yield(configuration)
-    end
-
-    def configuration
-      @configuration ||= Configuration.new
-    end
-    alias config configuration
-  end
-end
