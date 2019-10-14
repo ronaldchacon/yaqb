@@ -13,7 +13,7 @@ module Yaqb
 
   class Config
     def paginator
-      @paginator || set_paginator
+      instance_variable_defined?(:@paginator) ? @paginator : set_paginator
     end
 
     def paginator=(paginator)
@@ -30,8 +30,11 @@ module Yaqb
     private
 
     def set_paginator
-      @paginator = :kaminari if defined?(Kaminari)
-      @paginator = :will_paginate if defined?(WillPaginate::CollectionMethods)
+      @paginator = if defined?(Kaminari)
+                     :kaminari
+                   elsif defined?(WillPaginate::CollectionMethods)
+                     :will_paginate
+                   end
     end
 
     def paginator_error_message(paginator)
