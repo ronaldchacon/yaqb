@@ -31,10 +31,10 @@ module Yaqb
 
     def set_paginator
       @paginator = if defined?(Kaminari)
-                     :kaminari
-                   elsif defined?(WillPaginate::CollectionMethods)
-                     :will_paginate
-                   end
+        :kaminari
+      elsif defined?(WillPaginate::CollectionMethods)
+        :will_paginate
+      end
     end
 
     def paginator_error_message(paginator)
