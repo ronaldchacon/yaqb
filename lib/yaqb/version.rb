@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Yaqb
-  VERSION = '0.3.1'.freeze
+  VERSION = '0.4.0'
 end
