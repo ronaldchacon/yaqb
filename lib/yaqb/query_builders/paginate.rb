@@ -1,12 +1,8 @@
 # frozen_string_literal: true
 
-require "yaqb/query_builders/paginators/#{Yaqb.config.paginator}_helper"
-
 module Yaqb
   module QueryBuilders
     class Paginate
-      include "Yaqb::QueryBuilders::Paginators::#{Yaqb.config.paginator.to_s.classify}Helper".constantize
-
       def initialize(scope, query_params, url)
         @query_params = query_params
         @page = validate_param!(:page, 1)
