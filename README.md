@@ -1,14 +1,21 @@
 # Yaqb
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/yaqb`. To experiment with that code, run `bin/console` for an interactive prompt.
+#### Yet Another Query Builder
+Yaqb is query builder that will filter, sort and paginate your ActiveRecord collections.
 
-TODO: Delete this and the text above, and describe your gem
+In addition to query building, presenters are used to manage what a consumer of your API can query.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+In your Gemfile
 
 ```ruby
+# Choose your preferred pagination gem
+gem 'kaminari' # or
+gem 'will_paginate' # or
+gem 'pagy'
+
+# Then add
 gem 'yaqb'
 ```
 
@@ -20,9 +27,76 @@ Or install it yourself as:
 
     $ gem install yaqb
 
+## Configuration
+
+By default, Yaqb will detect if you are using Kaminari, WillPaginate, or Pagy. If you want to change any of the configurable settings, you may do so:
+
+```ruby
+Yaqb.configure do |config|
+  # If for whatever reason you are using multiple pagination gems, you can manually set which gem to use.
+  config.paginator = :kaminari # :will_paginate, :pagy
+end
+```
+
 ## Usage
 
-TODO: Write usage instructions here
+### Controllers
+
+In your controller, you will need to include the following the module: `Yaqb::Base`
+
+```ruby
+class ApplicationController < ActionController::Base # or ActionController::API
+  include Yaqb::Base
+end
+
+# And then to use Yaqb
+
+class BooksController < ApplicationController
+  def index
+    # #orchestrate expects a collection and a presenter.
+    # #orchestrate return a results object meaning you will have access to the following methods:
+    # #scope - This is your collection after being filtered, sorted and paginated
+    # #links - This returns a hash of links based on the paginated results.
+    result = orchestrate(Books.all, BookPresenter)
+
+    # Depending on your serializer you can render your data as so:
+    # BluePrinter gem by procore is being here:
+    render json: BookBlueprint.render(request.scope, root: :data, meta: { links: request.links })
+  end
+end
+```
+
+### Presenters
+
+Presenters will allow you to control what a consumer of your API can sort and filter by.
+
+Your Presenter class will need to inherit from `Yaqb::Presenter`
+
+```ruby
+class BookPresenter < Yaqb::Presenter
+  sort_by :id, :title, :created_at, :updated_at
+  filter_by :id, :title
+end
+```
+
+### Handling Errors
+
+By default Yaqb will rescue from `QueryBuilderError` and return that error to the consumer
+
+Given the following API call:
+
+`GET https://api.example.com/v1/books?per=a`
+
+The following response will be returned
+
+```json
+{
+  "error": {
+    "message": "Invalid pagination params. Only numbers are supported for \"page\" and \"per\"",
+    "invalid_params": "per=a"
+  }
+}
+```
 
 ## Development
 
