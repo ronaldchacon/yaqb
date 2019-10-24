@@ -17,6 +17,13 @@ RSpec.describe Yaqb::QueryBuilders::Paginate do
     it { expect(paginated.size).to eq 2 }
     it { expect(paginated.first).to eq recipe1 }
     it { expect(paginated.last).to eq recipe2 }
+
+    context "with invalid parameters" do
+      let(:params) { HashWithIndifferentAccess.new(page: 'fake', per: '2') }
+      it 'raises a QueryBuilderError exception' do
+        expect { paginated }.to raise_error(Yaqb::Errors::QueryBuilderError)
+      end
+    end
   end
 
   describe '#links' do
