@@ -29,7 +29,7 @@ module Yaqb
 
       def paginate
         current_url = @request.base_url + @request.path
-        paginator = Paginate.new(@scope, @request.query_parameters, current_url)
+        paginator = Paginate.new(@scope, @params, current_url)
         @response.headers['Link'] = @links = paginator.links
         paginator.paginate
       end
@@ -39,7 +39,7 @@ module Yaqb
       end
 
       def filter
-        Filter.new(@scope, @params.to_unsafe_hash, @presenter).filter
+        Filter.new(@scope, @params, @presenter).filter
       end
     end
   end
