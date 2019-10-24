@@ -25,7 +25,7 @@ module Yaqb
 
       def validate!(name, value)
         columns = @presenter.sort_attributes.join(', ')
-        raise QueryBuilderError.new("#{name}=#{value}"),
+        raise Errors::QueryBuilderError.new("#{name}=#{value}"),
               "Invalid sorting params. sort: (#{columns}), 'dir': asc, desc"
       end
     end
