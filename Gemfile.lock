@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    yaqb (0.5.1)
+    yaqb (0.5.2)
 
 GEM
   remote: https://rubygems.org/
