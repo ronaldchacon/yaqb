@@ -88,7 +88,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord (>= 4.2)
   bundler (~> 2.0)
   database_cleaner
   factory_bot

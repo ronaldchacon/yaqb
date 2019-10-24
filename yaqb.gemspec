@@ -20,6 +20,7 @@ Gem::Specification.new do |spec|
   spec.metadata['changelog_uri'] = spec.homepage
 
   spec.required_ruby_version = '>= 2.3.0'
+  spec.requirements << 'Ruby on Rails'
   spec.requirements << 'Kaminari'
   spec.requirements << 'WillPaginate'
   spec.requirements << 'Pagy'
@@ -36,7 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 2.0'
   spec.add_development_dependency 'rake', '~> 12.3.0'
   spec.add_development_dependency 'pry'
-  spec.add_development_dependency 'activerecord', '>= 4.2'
   spec.add_development_dependency 'sqlite3'
   spec.add_development_dependency 'rspec', '~> 3.8.0'
   spec.add_development_dependency 'database_cleaner'
