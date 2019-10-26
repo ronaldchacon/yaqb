@@ -66,6 +66,30 @@ class BooksController < ApplicationController
 end
 ```
 
+At the moment Yaqb will require the following parameters to be passed through:
+
+pagination: `page` and `per`
+
+sorting: `sort` and `dir`
+
+filtering: `q[]`
+
+### Filtering
+
+#### Supported predicates
+
+The following predicates are available: `eq`, `cont` `notcont` `start` `end` `gt` `lt`
+
+Predicates can be appended to a field set in your Presenter.
+
+#### Parameters
+
+Parameters are passed through the param `q[]`.
+
+E.g. To filter by a title containing a word: `q[title_cont]`
+
+E.g. `title_eq` or `created_at_lt`
+
 ### Presenters
 
 Presenters will allow you to control what a consumer of your API can sort and filter by.
