@@ -60,7 +60,7 @@ class BooksController < ApplicationController
     result = orchestrate(Books.all, BookPresenter)
 
     # Depending on your serializer you can render your data as so:
-    # BluePrinter gem by procore is being here:
+    # BluePrinter gem by procore is used here:
     render json: BookBlueprint.render(request.scope, root: :data, meta: { links: request.links })
   end
 end
@@ -81,7 +81,7 @@ end
 
 ### Handling Errors
 
-By default Yaqb will rescue from `QueryBuilderError` and return that error to the consumer
+By default Yaqb will rescue from any query errors with `QueryBuilderError` and return that error to the consumer
 
 Given the following API call:
 
